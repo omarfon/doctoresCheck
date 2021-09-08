@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row page-titles">
+          <div class="col-md-12 align-self-center">
+            <h3 class="text-themecolor">Historia de Consultas médicas</h3>
+          </div>
+          <div class="">
+            <button
+              class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
+                class="ti-settings text-white"></i></button>
+          </div>
+        </div>
+        <mat-horizontal-stepper #stepper>
+          <div *ngFor="let c of consultas; let i=index">
+            <mat-step label="{{c.newConsulta.datetime | date:'mediumDate'}}" *ngIf="c.fechaFinally">
+              <p class="tituloDiagnostico"><span>Diagnostico:</span> {{c.newConsulta.datosConsulta.diagnostic}}</p>
+              <div class="row">
+                <div class="col-lg-5">
+                  <h4>Resumen de la Consulta</h4>
+                  <div class="col-lg-12">
+                    <p class="titulodetalle">motivo: </p>
+                    <p class="datosConsulta">{{c.newConsulta.datosConsulta.motive}}</p>
+                  </div>
+                  <div class="col-lg-12">
+                    <p class="titulodetalle">exploración: </p>
+                    <p class="datosConsulta">{{c.newConsulta.datosConsulta.exploration}}</p>
+                  </div>
+                  <div class="col-lg-12">
+                    <p class="titulodetalle">pronostico: </p>
+                    <p class="datosConsulta">{{c.newConsulta.datosConsulta.pronostico}}</p>
+                  </div>
+                </div>
+                <div class="col-lg-7">
+                  <h4>Plan de Acción</h4>
+                  <div class="row">
+                    <div class="col-lg-7">
+                      <p class="blue">Medicamento</p>
+                    </div>
+                    <div class="col-lg-3">
+                      <p class="blue">Dosis</p>
+                    </div>
+                    <div class="col-lg-2">
+                      <p class="blue">Duración</p>
+                    </div>
+
+                    <div class="col-lg-12" *ngFor="let m of c.newConsulta.prescription; let i=index">
+                      <div class="row">
+                        <div class="col-lg-7 inputs">
+                          {{m.principioActivo}}
+                        </div>
+                        <div class="col-lg-3 inputs">
+                          {{m.indicacionesDosis}}
+                        </div>
+                        <div class="col-lg-2 inputs">
+                          {{m.indicacionesTiempo}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- <button mat-button matStepperNext>Next</button> -->
+              </div>
+            </mat-step>
+          </div>
+        </mat-horizontal-stepper>
+      </div>
+    </div>
+  </div>
+</div>

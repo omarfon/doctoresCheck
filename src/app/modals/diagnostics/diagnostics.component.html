@@ -1,0 +1,31 @@
+<p>Buscar Diagnostico</p>
+<form [formGroup]="diagnosForm">
+  <div class="row">
+    <div class="col-lg-2">
+      <div class="form-group">
+        <label class="control-label m-b-20 title">Código</label>
+        <input type="text" id="code" class="form-control" #codigo (keyup)="getDiagnosticCode()" formControlName="code"
+          placeholder="Busca por código">
+      </div>
+    </div>
+    <div class="col-lg-10">
+      <div class="form-group">
+        <label class="control-label m-b-20 title">Busca por nombre</label>
+        <input type="text" id="name" class="form-control" #nombre (keyup)="getDiagnostic()" formControlName="name"
+          placeholder="Nombre">
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="row">
+        <div class=" col-lg-12" *ngFor="let d of diagnosticos">
+          <div class="row" (click)="sendDiagnostic(d)">
+            <div class="col-lg-2">{{d.codigo}}</div>
+            <div class="col-lg-10">
+              <h6>{{d.nombre}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

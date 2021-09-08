@@ -1,0 +1,80 @@
+<div id="main-wrapper">
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
+  <router-outlet></router-outlet>
+  <div class="page-wrapper" style="height:100vh!important;">
+    <div class="container">
+      <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+          <h3 class="text-themecolor m-t-20">Bienvenido/a {{name}}</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+          </ol>
+        </div>
+        <div class="">
+          <button
+            class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
+              class="ti-settings text-white"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 m-t-20">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card bg-success text-white">
+                <div class="card-body">
+                  <div class="d-flex">
+                    <div class="stats">
+                      <h1 class="text-white">{{citasPendientes}}</h1>
+                      <h6 class="text-white">Citas de hoy</h6>
+                      <button class="btn btn-rounded btn-outline btn-light m-t-10 font-14"
+                        (click)="goToCitasPendientes()">Revisar</button>
+                    </div>
+                    <div class="stats-icon text-right ml-auto"><i class="icon-people display-5 op-3 text-dark"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card bg-primary text-white">
+                <div class="card-body">
+                  <div class="d-flex">
+                    <div class="stats">
+                      <h1 class="text-white">{{totalConsultasprevias}}</h1>
+                      <h6 class="text-white">Citas Realizadas</h6>
+                      <button class="btn btn-rounded btn-outline btn-light m-t-10 font-14"
+                        (click)="goToCitas()">Revisar</button>
+                    </div>
+                    <div class="stats-icon text-right ml-auto"><i class=" icon-badge display-5 op-3 text-dark"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card bg-info text-white">
+                <div class="card-body">
+                  <div class="d-flex">
+                    <div class="stats">
+                      <h1 class="text-white">4</h1>
+                      <h6 class="text-white">Seguimiento de pacientes</h6>
+                      <button class="btn btn-rounded btn-outline btn-light m-t-10 font-14">Revisar</button>
+                    </div>
+                    <div class="stats-icon text-right ml-auto"><i class="icon-eyeglass display-5 op-3 text-dark"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8"></div>
+
+      </div>
+    </div>
+  </div>
+</div>

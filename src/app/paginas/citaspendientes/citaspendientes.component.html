@@ -1,0 +1,79 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="page-wrapper" style="height:100vh!important;">
+  <div class="container-fluid">
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <!-- <h3 class="text-themecolor">Listado de citas</h3> -->
+      </div>
+      <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+          <li class="breadcrumb-item">Citas Pendientes</li>
+        </ol>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <h3 class="m-l-10">Citas de Hoy</h3>
+        <div class="row">
+          <div class="col-lg-11 col-md-11" *ngFor="let c of citas">
+            <div class="card btn" *ngIf="c.status == 'confirmada'">
+              <div class="card-body" (click)="goTodetail(c)">
+                <p class="NombrePaciente">{{c.patientName}} {{c.patientLastname}}</p>
+                <div class="row">
+                  <div class="col">
+                    <p class="left"><b>{{c.datetime | date:'shortTime'}}</b></p>
+                  </div>
+                  <div class="col">
+                    <p class="pendiente">Pendiente</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card btn" *ngIf="c.status == 'iniciado'">
+              <div class="card-body" (click)="goTodetail(c)">
+                <p class="NombrePaciente">{{c.patientName}} {{c.patientLastname}}</p>
+                <div class="row">
+                  <div class="col">
+                    <p class="left"><b>{{c.datetime | date:'shortTime'}}</b></p>
+                  </div>
+                  <div class="col">
+                    <p class="pendiente">Pendiente</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card bg-warning" *ngIf="c.status == 'finalizado' ">
+              <div class="card-body">
+                <p class="nombrePacienteFinalizada">{{c.patientName}} {{c.patientLastname}}</p>
+                <div class="row">
+                  <div class="col">
+                    <p class="leftFinalizada"><b>{{c.datetime | date:'shortTime'}}</b></p>
+                  </div>
+                  <div class="col">
+                    <p class="finalizada">Finalizada</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--    <div class="col-lg-6 col-sm-12">
+        <h3 class="m-l-10">Citas Realizadas</h3>
+        <div class="row">
+          <div class="col-lg-11 col-md-11" *ngFor="let c of citas">
+            <div class="card bg-warning" *ngIf="c.status == 'pasada' ">
+              <div class="card-body">
+                <p class="NombrePaciente">{{c.patientName}} {{c.patientLastname}}</p>
+                <p class="left"><b>{{c.datetime | date:'shortTime'}}</b></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+.video {
+  background: #000;
+  width: 100%;
+  height: 40vh;
+}
+
+.NombrePaciente {
+  color: #035aa6;
+  font-size: 1.3em;
+  text-align: left;
+}
+
+.nombrePacienteFinalizada {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.3em;
+  text-align: left !important;
+}
+
+.left {
+  text-align: left;
+  margin-top: 0;
+}
+
+.leftFinalizada {
+  color: #fff;
+  text-align: left;
+  margin-top: 0;
+}
+
+.finalizada {
+  background: #035aa6;
+  border-radius: 20px;
+  padding: .5em 1em;
+  float: right;
+  color: #fff;
+  margin-bottom: 0 !important;
+  margin-top: -10px;
+}
+
+.pendiente {
+  background: #FFB12A;
+  border-radius: 20px;
+  padding: .5em 1em;
+  float: right;
+  color: #fff;
+  margin-bottom: 0 !important;
+  margin-top: -10px;
+}

@@ -1,0 +1,63 @@
+<div class="row" id="htmlData" #htmlData>
+  <div class="col-lg-12 col-md-12">
+    <p class="blue big">RECETA MÉDICA</p>
+    <div class="row">
+      <div class="col-lg-9 col-md-9">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 blue"><span>Para:</span> {{dataPaciente.nombre}}
+            {{dataPaciente.apellidopUsuario}}</div>
+          <div class="col-lg-12 col-md-12 blue"><span>Diagnostico:</span> {{dataPaciente.diagnostico}}</div>
+          <div class="col-lg-12 col-md-12 blue"><span>Fecha:</span> {{dataPaciente.datetime}}</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3">
+        <img src="../../../assets/images/logoaviva.svg" alt="">
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="col-lg-12 col-md-12">
+    <div class="row">
+      <div class="col-lg-4 col-md-4">
+        <h4>Medicina</h4>
+      </div>
+      <div class="col-lg-3 col-md-3">
+        <h4>marca:</h4>
+      </div>
+      <div class="col-lg-1 col-md-1">
+        <h4>Dosis</h4>
+      </div>
+      <div class="col-lg-2 col-md-2 text-center">
+        <h4>Frecuencia</h4>
+      </div>
+      <div class="col-lg-1 col-md-1 text-center">
+        <h4>Duración</h4>
+      </div>
+      <div class="col-lg-1 col-md-1 text-center">
+        <h4>Total</h4>
+      </div>
+    </div>
+    <div class="row m-b-20" *ngFor="let m of receta">
+      <div class="col-lg-4 col-md-4">
+        <p class="textoDetalle">{{m.principioActivo}}</p>
+      </div>
+      <div class="col-lg-3 col-md-3">
+        <p class="textoDetalle">{{m.productoSugerido}}</p>
+      </div>
+      <div class="col-lg-1 col-md-1">
+        <p class="textoDetalle">{{m.indicacionesDosis}}</p>
+      </div>
+      <div class="col-lg-2 col-md-2 text-center">
+        <p class="textoDetalle">cada {{m.frecuencia}} horas</p>
+      </div>
+      <div class="col-lg-1 col-md-1 text-center">
+        <p class="textoDetalle">{{m.indicacionesTiempo}} días</p>
+      </div>
+      <div class="col-lg-1 col-md-1 text-center">
+        <p class="textoDetalle">{{m.cantidad}}</p>
+      </div>
+      <div *ngIf="m.anotations" class="col-lg-12 col-md-12 anotations"><span class="blue">Anotaciones:</span>
+        {{m.indicacionesNota}}</div>
+    </div>
+  </div>
+</div>

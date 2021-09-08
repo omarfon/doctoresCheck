@@ -1,0 +1,413 @@
+<div id="main-wrapper">
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
+  <div class="page-wrapper">
+    <!--  <app-sidebar></app-sidebar> -->
+    <div class="container-fluid">
+      <div class="row page-titles">
+        <div class="col-lg-2 citasprevias" (click)="openModalCitas()">
+          <button class="btn btn-large btn-info">
+            Ver Historia clínica
+          </button>
+        </div>
+        <div class="col-md-8 col-lg-8 align-self-left" *ngIf="dataPaciente">
+          <h6 class="text-themecolor">Paciente: {{dataPaciente.patientName}}
+            {{dataPaciente.patientLastname}} {{dataPaciente.patientLastname2}}</h6>
+          <div class="row" *ngIf="datosPaciente">
+            <div class="col-lg-2">
+              <p>Sexo:<b>{{datosPaciente.gender.name}}</b></p>
+            </div>
+            <div class="col-lg-2">
+              <p>Edad: {{fechaNac}}</p>
+            </div>
+            <div class="col-lg-3">
+              <p>Telefono: {{datosPaciente.telefono1}}</p>
+            </div>
+            <div class="col-lg-5">
+              <p>Email: {{datosPaciente.emailTo}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <button class="btn btn-rounded btn-warning" (click)="closeSession()">
+            terminar consulta
+          </button>
+        </div>
+        <!--             <div class="col-md-5 align-self-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+                    <li class="breadcrumb-item"><a [routerLink]="['/citaspendientes']">Citas Pendientes</a></li>
+                    <li class="breadcrumb-item">Consulta</li>
+                </ol>
+            </div> -->
+        <div class="">
+          <button
+            class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
+              class="ti-settings text-white"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="card">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-12 videoSize">
+
+                  <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+                  <!-- <p class="horaInicio fondo">{{time}}</p> -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-5">
+                  <div [id]="localCallId" class="local"></div>
+                </div>
+                <div class="col-lg-7">
+                  <h4 class="card-title m-b-20">Datos Pre-consulta</h4>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <label class="control-label m-b-20">Enfermedades pre-existentes:</label>
+                    </div>
+                    <div class="col-lg-12">
+                      <label class="control-label m-b-20">Medicinas pre-existentes:</label>
+                    </div>
+                    <div class="col-lg-12">
+                      <label class="control-label m-b-20">Operaciones previas:</label>
+
+                    </div>
+                    <div class="col-lg-12">
+                      <label class="control-label m-b-20">Comentarios adicionales:</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-7">
+          <div class="card" id="recetascroll">
+            <div class="card-body m-t-0">
+              <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">MEAP</a>
+                </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Seguimiento y
+                    Exámenes</a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#receta" role="tab">Receta</a> </li>
+              </ul>
+              <form [formGroup]="consultaForm" (ngSubmit)="onSaveForm()">
+                <div class="tab-content">
+                  <div class="tab-pane active" id="profile" role="tabpanel">
+                    <!-- <h4 class="card-title m-t-20 m-b-20">Completar MEAP</h4> -->
+                    <div class="row ">
+                      <div class="col-lg-12 ">
+                        <div class="form-group m-t-10">
+                          <label for="" class="labelCustomize">*este campo es requerido</label>
+                          <textarea type="text" id="motive" class="form-control" formControlName="motive"
+                            placeholder="Motivo consulta">
+                                                          </textarea>
+                          <ng-container *ngIf="!motive.valid && motive.touched">
+                            <p *ngIf="motive.errors.required" class="error-message">
+                              Es necesario llenar este campo
+                            </p>
+                            <p *ngIf="motive.errors.minlength" class="error-message">
+                              Ingresa como mínimo 5 letras
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label for="" class="labelCustomize">*este campo es requerido</label>
+                          <textarea type="text" id="exploration" class="form-control" formControlName="exploration"
+                            placeholder="Exploración">
+                                                     </textarea>
+                          <ng-container *ngIf="!exploration.valid && exploration.touched">
+                            <p *ngIf="exploration.errors.required" class="error-message">
+                              Es necesario llenar este campo
+                            </p>
+                            <p *ngIf="exploration.errors.minlength" class="error-message">
+                              Ingresa como mínimo 5 letras
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label for="" class="labelCustomize">*este campo es requerido</label>
+                          <textarea type="text" id="anamnesis" class="form-control" formControlName="anamnesis"
+                            placeholder="Anamnesis">
+                                                    </textarea>
+                          <ng-container *ngIf="!anamnesis.valid && anamnesis.touched">
+                            <p *ngIf="anamnesis.errors.required" class="error-message">
+                              Es necesario llenar este campo
+                            </p>
+                            <p *ngIf="anamnesis.errors.minlength" class="error-message">
+                              Ingresa como mínimo 5 letras
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label for="" class="labelCustomize">*este campo es requerido</label>
+                          <textarea type="text" id="pronostico" class="form-control" formControlName="pronostico"
+                            placeholder="Pronostico">
+                                                              </textarea>
+                          <ng-container *ngIf="!pronostico.valid && pronostico.touched">
+                            <p *ngIf="pronostico.errors.required" class="error-message">
+                              Es necesario llenar este campo
+                            </p>
+                            <p *ngIf="pronostico.errors.minlength" class="error-message">
+                              Ingresa como mínimo 5 letras
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-lg-12" *ngIf="!diagnostico">
+                        <label for="" class="labelCustomize">*este campo es requerido</label>
+                        <textarea type="text" class="form-control" formControlName="diagnostic"
+                          placeholder="Diagnostico" (click)="openModalDiagnostic()">
+                         </textarea>
+                        <ng-container *ngIf="!diagnostic.valid && diagnostic.touched">
+                          <p *ngIf="diagnostic.errors.required" class="error-message">
+                            Es necesario llenar este campo
+                          </p>
+                          <p *ngIf="diagnostic.errors.minlength" class="error-message">
+                            Ingresa como mínimo 5 letras
+                          </p>
+                        </ng-container>
+                      </div>
+                      <div class="col-lg-12" *ngIf="diagnostico">
+                        <div class="row">
+                          <div class="col-lg-10">
+                            <textarea type="text" disabled class="form-control" [(ngModel)]="diagnostico"
+                              formControlName="diagnostic" placeholder="Diagnostico">
+                            </textarea>
+                          </div>
+                          <div class="col-lg-1">
+                            <button class="btn btn-info" (click)="cancelar()">
+                              <i class="mdi mdi-close"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class=" tab-pane" id="settings" role="tabpanel">
+                    <!--  <h4 class="card-title m-t-20 m-b-20">Tratamiento</h4> -->
+                    <div class="col-lg-12">
+                      <div class="form-group m-t-10">
+                        <textarea type="text" id="evolution" class="form-control" formControlName="evolution"
+                          placeholder="Evolución">
+                                                  </textarea>
+                        <ng-container *ngIf="!evolution.valid && evolution.touched">
+                          <p *ngIf="evolution.errors.required" class="error-message">
+                            Es necesario llenar este campo
+                          </p>
+                          <p *ngIf="evolution.errors.minlength" class="error-message">
+                            Ingresa como mínimo 5 letras
+                          </p>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <textarea type="text" id="more" class="form-control" formControlName="more"
+                          placeholder="Adicionionales">
+                                                </textarea>
+                        <ng-container *ngIf="!more.valid && more.touched">
+                          <p *ngIf="more.errors.required" class="error-message">
+                            Es necesario llenar este campo
+                          </p>
+                          <p *ngIf="more.errors.minlength" class="error-message">
+                            Ingresa como mínimo 5 letras
+                          </p>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <textarea type="text" id="examaux" class="form-control" formControlName="examaux"
+                          placeholder="Exámenes auxiliares">
+                                              </textarea>
+                        <ng-container *ngIf="!examaux.valid && examaux.touched">
+                          <p *ngIf="examaux.errors.minlength" class="error-message">
+                            Ingresa como mínimo 5 letras
+                          </p>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <textarea type="text" id="proced" class="form-control" formControlName="proced"
+                          placeholder="Procedimientos solicitados">
+                                              </textarea>
+                        <ng-container *ngIf="!proced.valid && proced.touched">
+                          <p *ngIf="proced.errors.minlength" class="error-message">
+                            Ingresa como mínimo 5 letras
+                          </p>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane " id="receta" role="tabpanel">
+                    <div class="form-group m-b-20 ">
+                      <div class="row m-t-20">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="cabecera" for="">Principio activo</label>
+                            <input type="text" id="activeprinciple" class="form-control"
+                              (keyup)="obtenerRecipes($event)" formControlName="activeprinciple" [(ngModel)]="farmaco">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label for="" class="cabecera">Marca comercial</label>
+                            <input type="text" id="marc" class="form-control" [(ngModel)]="farmacoMarca"
+                              formControlName="marc">
+                          </div>
+                        </div>
+                        <!--    <div class="col-lg-4" *ngIf="farmacoSelect">
+                          <div class="form-group">
+                          
+                            <input type="text" id="concentration" class="form-control"
+                              [(ngModel)]="farmacoConcentration" formControlName="concentration"
+                              placeholder="Concentración">
+
+                          </div>
+                        </div> -->
+                        <div class="col-lg-12" *ngIf="farmacos">
+                          <div class="row " id="recipes">
+                            <div class="col-lg-12" *ngFor="let f of farmacos">
+                              <p class="medicinas btn" (click)="selectFarmaco(f)">
+                                <span>{{f.principiosActivos[0].nombre}}</span> -
+                                {{f.marcaComercial}}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <!--  <div class="col-lg-3">
+                          <div class="form-group">
+                            <input type="text" id="presentation" class="form-control" formControlName="presentation"
+                              placeholder="Presentación">
+                          </div>
+                        </div> -->
+                        <div class="col-lg-3">
+
+                          <div class="form-group">
+                            <label for="" class="cabecera">Duración</label>
+                            <div class="input-group bootstrap-touchspin">
+                              <input type="number" id="duration" class="form-control" formControlName="duration"
+                                [(ngModel)]="duration">
+                              <span class="input-group-addon bootstrap-touchspin-postfix">días</span>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label for="" class="cabecera">Frecuencia</label>
+                            <div class="input-group bootstrap-touchspin">
+                              <span class="input-group-addon bootstrap-touchspin-prefix">cada</span>
+                              <input type="number" id="frecuencia" class="form-control" formControlName="frecuencia"
+                                [(ngModel)]="frecuencia">
+                              <span class="input-group-addon bootstrap-touchspin-postfix">horas</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-3">
+                          <div class="form-group">
+                            <label for="" class="cabecera">Dosis</label>
+                            <input type="text" id="dosis" class="form-control" formControlName="dosis"
+                              [(ngModel)]="dosis">
+                          </div>
+                        </div>
+                        <div class="col-lg-2">
+                          <div class="form-group">
+                            <label for="" class="cabecera">Total</label>
+                            <input type="text" id="total" class="form-control" formControlName="total"
+                              [(ngModel)]="total">
+
+                          </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label for="" class="cabecera">Indicaciones</label>
+                            <input type="text" id="anotations" class="form-control" formControlName="anotations"
+                              [(ngModel)]="anotations">
+                          </div>
+                        </div>
+                        <!--    <div class="row">
+                          <div class="col-lg-4" *ngFor="let farmaco of farmacos">
+                            <h6>{{farmaco.nombreGenerico}}</h6>
+                          </div>
+                        </div> -->
+                      </div>
+                      <div class="row">
+                        <!--  <div class="col-lg-8">
+                          <button class="btn btn-info" (click)="exportAsPDF('recetascroll')">convertir a
+                            pdf</button>
+                        </div> -->
+                        <div class="col-lg-4">
+                          <button class="btn btn-block btn-outline-success" (click)="addNewMedicine()">
+
+                            <i class="fa fa-plus"></i>
+                            Agregar a receta
+                          </button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 medicina" *ngFor="let m of medicinas; let i=index">
+                          <div class="row">
+                            <!--    <div class="col-lg-12">
+                              {{i+1}}
+                            </div> -->
+                            <div class="col-lg-12 m-t-10 m-b-20">
+                              <p class="principleactive">{{m.principioActivo | slice:0:25}}...</p>
+                            </div>
+                            <div class="col-lg-12">
+                              <p class="textopequeño"> administrar <span>{{m.indicacionesDosis}} </span></p>
+                            </div>
+                            <div class="col-lg-12">
+                              <p class="textopequeño"> cada {{m.frecuencia}} horas</p>
+                            </div>
+                            <div class="col-lg-12">
+                              <p class="textopequeño"> por {{m.indicacionesTiempo}} días</p>
+                            </div>
+                            <!-- <div class="col-lg-4">
+                              {{m.total}}
+                            </div> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-6">
+                  </div>
+                  <div class="col-lg-6 botonGuardar">
+                    <button type="submit" class="btn btn-block btn-info block">Guardar</button>
+                  </div>
+
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+        <!-- <pre>{{consultaForm.value | json}}</pre> -->
+        <!-- <div class="alert alert-success">This is an example top alert. You can edit what u wish. </div> -->
+      </div>
+    </div>
+  </div>
+</div>
