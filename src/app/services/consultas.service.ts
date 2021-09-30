@@ -65,19 +65,58 @@ export class ConsultasService {
     return this.afs.collection('doctors').snapshotChanges();
   }
 
+  getAllReservas() {
+    return this.afs.collection('creacionCitas').valueChanges();
+  }
+
+ /*  getAllReservas() {
+   return this.afs.collection('creacionCitas').valueChanges().subscribe(values => console.log(values.length));
+
+  } */
+
+  actualiceDataPerUser(data, id){
+    const doctorId = id.toString();
+    console.log(doctorId);
+    return this.afs.collection('doctors').doc(doctorId).set({
+      data:{
+        formacion:data.formacion,
+        enferquetrato: data.enferquetrato,
+        fraseCorta: data.fraseCorta,
+        fraseExtendida: data.fraseExtendida
+      }
+    }, {merge:true})
+    .catch(err => {
+      console.log('error de escritura en cita', err)
+    });
+  }
+
+  verifyDoctor(id){
+    const doctorId = id;
+    console.log(doctorId);
+    return this.afs.collection('doctors').doc(doctorId).set({
+      data:{
+        visible:true
+      }
+    }, {merge:true})
+    .catch(err => {
+      console.log('error de escritura en cita', err)
+    });
+  }
+
+
   getDatesPerPatient(idUser) {
     console.log('idUser en servicio:', idUser);
     return this.afs.collection('consultas', ref => ref.where('uid', '==', idUser)).valueChanges();
   }
 
-  getConsultasPerDoctor() {
+ getConsultasPerDoctor() {
     const doctorId = localStorage.getItem('dataDoctor');
     let doctor = JSON.parse(doctorId);
     const idDoctor = doctor.professionalId;
     console.log('idUser en servicio:', idDoctor);
     return this.afs.collection('consultas', ref => ref.where('uidDoctor', '==', idDoctor))
       .snapshotChanges();
-  }
+  } 
 
   getConsultasPerDay() {
     const doctorId = localStorage.getItem('dataDoctor');

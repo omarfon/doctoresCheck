@@ -14,66 +14,65 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-6 col-sm-12">
-        <h3 class="m-l-10">Citas de Hoy</h3>
+      <div class="col-lg-12 col-sm-12">
+        <h3 class="m-l-10">Citas Reservadas desde</h3>
         <div class="row">
-          <div class="col-lg-11 col-md-11" *ngFor="let c of citas">
-            <div class="card btn" *ngIf="c.status == 'confirmada'">
-              <div class="card-body" (click)="goTodetail(c)">
-                <p class="NombrePaciente">{{c.patientName}} {{c.patientLastname}}</p>
-                <div class="row">
-                  <div class="col">
-                    <p class="left"><b>{{c.datetime | date:'shortTime'}}</b></p>
-                  </div>
-                  <div class="col">
-                    <p class="pendiente">Pendiente</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card btn" *ngIf="c.status == 'iniciado'">
-              <div class="card-body" (click)="goTodetail(c)">
-                <p class="NombrePaciente">{{c.patientName}} {{c.patientLastname}}</p>
-                <div class="row">
-                  <div class="col">
-                    <p class="left"><b>{{c.datetime | date:'shortTime'}}</b></p>
-                  </div>
-                  <div class="col">
-                    <p class="pendiente">Pendiente</p>
+          <div class="col-lg-12 col-md-12 m-t-20">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="card bg-success text-white">
+                  <div class="card-body">
+                    <div class="d-flex">
+                      <div class="stats">
+                        <h1 class="text-white">{{totalReservas}}</h1>
+                        <h6 class="text-white">Reservas desde WEB</h6>
+                        <!-- <button class="btn btn-rounded btn-outline btn-light m-t-10 font-14"
+                          (click)="goToCitasPendientes()">Revisar</button> -->
+                      </div>
+                      <div class="stats-icon text-right ml-auto"><i class="icon-people display-5 op-3 text-dark"></i>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="card bg-warning" *ngIf="c.status == 'finalizado' ">
-              <div class="card-body">
-                <p class="nombrePacienteFinalizada">{{c.patientName}} {{c.patientLastname}}</p>
-                <div class="row">
-                  <div class="col">
-                    <p class="leftFinalizada"><b>{{c.datetime | date:'shortTime'}}</b></p>
-                  </div>
-                  <div class="col">
-                    <p class="finalizada">Finalizada</p>
+              <div class="col-lg-4">
+                <div class="card bg-primary text-white">
+                  <div class="card-body">
+                    <div class="d-flex">
+                      <div class="stats">
+                       <!--  <h1 class="text-white">{{totalConsultasprevias}}</h1> -->
+                        <h6 class="text-white">Citas Realizadas</h6>
+                        <!-- <button class="btn btn-rounded btn-outline btn-light m-t-10 font-14"
+                          (click)="goToCitas()">Revisar</button> -->
+                      </div>
+                      <div class="stats-icon text-right ml-auto"><i class=" icon-badge display-5 op-3 text-dark"></i>
+                      </div>
+                    </div>
                   </div>
                 </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card bg-info text-white">
+                  <div class="card-body">
+                    <div class="d-flex">
+                      <div class="stats">
+                        <h1 class="text-white">4</h1>
+                        <h6 class="text-white">Seguimiento de pacientes</h6>
+                        <button class="btn btn-rounded btn-outline btn-light m-t-10 font-14">Revisar</button>
+                      </div>
+                      <div class="stats-icon text-right ml-auto"><i class="icon-eyeglass display-5 op-3 text-dark"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
               </div>
             </div>
           </div>
+          <div class="col-lg-8"></div>
+  
         </div>
       </div>
-      <!--    <div class="col-lg-6 col-sm-12">
-        <h3 class="m-l-10">Citas Realizadas</h3>
-        <div class="row">
-          <div class="col-lg-11 col-md-11" *ngFor="let c of citas">
-            <div class="card bg-warning" *ngIf="c.status == 'pasada' ">
-              <div class="card-body">
-                <p class="NombrePaciente">{{c.patientName}} {{c.patientLastname}}</p>
-                <p class="left"><b>{{c.datetime | date:'shortTime'}}</b></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
     </div>
   </div>
 </div>

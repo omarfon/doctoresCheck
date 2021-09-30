@@ -4,7 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { RecipeComponent } from 'src/app/modals/recipe/recipe.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import * as jsPDF from 'jspdf'
-
+import { EditDataDoctorComponent } from './../../modals/edit-data-doctor/edit-data-doctor.component';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-cita',
@@ -65,10 +66,17 @@ export class CitaComponent implements OnInit {
  upDateDoctorVisibility(id){
    console.log('visibility doc', id)
     const idDoc = id.id;
-    console.log(idDoc);
-   /* this.consultaSrv.updateDoctorVisibility(id).then( req => {
-     console.log(req)
-   }) */
+  this.consultaSrv.verifyDoctor(idDoc).then(resp => {
+    Swal.fire('Data Aprobada...', 'Listo... acabas de aprobar los datos de este doctor', 'success')
+  })
+ }
+
+ editDoctor(c){
+  const dialogRef = this.modal.open(EditDataDoctorComponent, {data:c});
+  dialogRef.afterClosed().subscribe(result => {
+    Swal.fire('Data Actualizada...', 'Listo... acabas de actualiza los datos de este doctor', 'success')
+  });
+   const modalrEF = this.modal.open(EditDataDoctorComponent, {data:c})
  }
 
 

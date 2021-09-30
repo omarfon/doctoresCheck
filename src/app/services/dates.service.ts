@@ -14,7 +14,7 @@ export class DatesService {
   public dataId: any;
   constructor(public http: HttpClient) {
     this.dataDoctor = localStorage.getItem('dataDoctor');
-    console.log(this.dataDoctor);
+/*     console.log(this.dataDoctor); */
   }
 
 

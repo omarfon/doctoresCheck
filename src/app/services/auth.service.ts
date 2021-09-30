@@ -13,6 +13,7 @@ export class AuthService {
   private public_autho = `${this.SERVER}users/public-authorization`;
   private login_doc = `${this.SERVER}auth/login-doctor`;
 
+
   constructor(public http: HttpClient, public afa: AngularFireAuth) { }
 
   getKey(){

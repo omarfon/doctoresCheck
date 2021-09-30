@@ -34,6 +34,7 @@
                         <th>fraseExtendida</th>
                         <th>formacion</th>
                         <th>enfermedades</th>
+                        <th>editar</th>
                         <th>aprobar</th>
                       </tr>
                     </thead>
@@ -45,6 +46,7 @@
                         <td>{{c.data.fraseExtendida}} </td>
                         <td>{{c.data.formacion}}</td>
                         <td>{{c.data.enferquetrato}}</td>
+                        <td> <button class="btn btn-success bt-success" (click)="editDoctor(c)">editar</button>
                         <td *ngIf="c.data.visible == false"> <button class="btn btn-info bt-outline" (click)="upDateDoctorVisibility(c)">aprobar</button>
                         <td *ngIf="c.data.visible == true"> <button class="btn btn-light bt-dissabled" >aprobado</button>
                         </td>

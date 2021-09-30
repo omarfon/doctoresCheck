@@ -48,6 +48,7 @@ import { registerLocaleData } from '@angular/common';
 import { ErrorconectionComponent } from './modals/errorconection/errorconection.component';
 import { ErrologinComponent } from './modals/errologin/errologin.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { EditDataDoctorComponent } from './modals/edit-data-doctor/edit-data-doctor.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -72,7 +73,8 @@ registerLocaleData(localeEs, 'es');
     DiagnosticsComponent,
     RecetaComponent,
     ErrorconectionComponent,
-    ErrologinComponent
+    ErrologinComponent,
+    EditDataDoctorComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +102,8 @@ registerLocaleData(localeEs, 'es');
     ErrorComponent,
     DiagnosticsComponent,
     ErrorconectionComponent,
-    ErrologinComponent
+    ErrologinComponent,
+    EditDataDoctorComponent
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'es' },],
   bootstrap: [AppComponent]

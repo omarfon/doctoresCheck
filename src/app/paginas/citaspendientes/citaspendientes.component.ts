@@ -15,6 +15,8 @@ export class CitaspendientesComponent implements OnInit {
   public citas;
   public consultas;
   public _consultas;
+  public reservas;
+  public totalReservas;
 
   constructor(public datesSrv: DatesService,
     public router: Router,
@@ -22,20 +24,18 @@ export class CitaspendientesComponent implements OnInit {
     public consultaSrv: ConsultasService) { }
 
   ngOnInit() {
-    this.getdatesCompletes();
     this.getDates();
   }
 
   getDates() {
-    this.datesSrv.getDates().subscribe(data => {
-      const datos = data.filter(x => x.provisionId === 845337);
-      if (datos) {
-        this.citas = datos;
-        console.log(this.citas);
-      }
+    this.consultaSrv.getAllReservas().subscribe(data => {
+      this.reservas = data;
+      this.totalReservas = this.reservas.length;
+      console.log(this.reservas);
     }, err => {
       console.log(err);
     });
+ /*    this.consultaSrv.getAllReservas(); */
   }
 
 
@@ -45,7 +45,7 @@ export class CitaspendientesComponent implements OnInit {
     this.router.navigate(['/detalle', data])
   }
 
-  getdatesCompletes() {
+/*   getdatesCompletes() {
     this.consultaSrv.getConsultasPerDoctor().subscribe(data => {
       this.consultas = data.map(d => {
         return {
@@ -61,7 +61,7 @@ export class CitaspendientesComponent implements OnInit {
         }
       })
     })
-  }
+  } */
 
 
 }

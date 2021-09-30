@@ -19,10 +19,10 @@ export class HeaderComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
-    const nombreDoctor = localStorage.getItem('dataDoctor');
+ /*    const nombreDoctor = localStorage.getItem('dataDoctor');
     this.data = JSON.parse(nombreDoctor);
     this.id = this.data.professionalId;
-    this.nombreDoctor = this.data.displayName;
+    this.nombreDoctor = this.data.displayName; */
   }
 
   closeSesion() {
