@@ -6,6 +6,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import * as jsPDF from 'jspdf'
 import { EditDataDoctorComponent } from './../../modals/edit-data-doctor/edit-data-doctor.component';
 import Swal from 'sweetalert2'
+import { DatesService } from '../../services/dates.service';
+import { API_ENDPOINT, API_IMAGE } from '../../../environments/environment';
+import { EditImageComponent } from '../../modals/edit-image/edit-image.component';
 
 @Component({
   selector: 'app-cita',
@@ -22,14 +25,18 @@ export class CitaComponent implements OnInit {
   public _consultas;
   public dataDoctors;
   p: number = 1;
+  public doctorsInfo;
+  public urlBase = API_IMAGE;
 
   constructor(public consultaSrv: ConsultasService,
     public modal: MatDialog,
+    public datesSrv: DatesService,
     public matSide: MatSidenavModule) { }
 
   ngOnInit() {
 /*     this.getAllConsultasPerDoctor(); */
     this.getAllConsultas();
+    this.getInfoDoctores();
   }
 
   getAllConsultasPerDoctor() {
@@ -46,6 +53,13 @@ export class CitaComponent implements OnInit {
       let consultas = this.consultas.filter(x => x.data !== undefined);
       this.consultas = consultas;
       console.log('this.consultas:', this.consultas);
+    })
+  }
+
+  getInfoDoctores(){
+    this.datesSrv.getInfoDoctors().subscribe(data => {
+      console.log(data);
+      this.doctorsInfo = data;
     })
   }
 
@@ -77,6 +91,10 @@ export class CitaComponent implements OnInit {
     Swal.fire('Data Actualizada...', 'Listo... acabas de actualiza los datos de este doctor', 'success')
   });
    const modalrEF = this.modal.open(EditDataDoctorComponent, {data:c})
+ }
+
+ upImage(c){
+    this.modal.open(EditImageComponent, {data:c});
  }
 
 

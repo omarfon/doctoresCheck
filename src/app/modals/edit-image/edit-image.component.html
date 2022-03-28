@@ -1,0 +1,17 @@
+<h3>Sube la imagen para cambiarla</h3>
+<p class="imagendebe">recuerda que la imagen debe llamarse {{dataDoctor.idDoc}}.png</p>
+<div class="row">
+    <div class="col">
+        <img class="imagenDoctor" src="{{urlBase}}/api/v2/ebooking/professionals/{{dataDoctor.idDoc}}/image-url" alt="">
+    </div>
+    <div *ngIf="preview">
+        <img style="width:150px;" [src]="preview" alt="">
+    </div>
+    <div class="col">
+        <form>
+            <input type="file" id="anotations" class="form-control" (change)="fileEvent($event)"
+                                  [(ngModel)]="image" name="image">
+            <button class="btn btn-primary" (click)="subirImagen($event)">subir imagen</button>
+        </form>
+    </div>
+</div>

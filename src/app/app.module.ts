@@ -33,6 +33,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DatepastComponent } from './modals/datepast/datepast.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatStepperModule } from '@angular/material/stepper';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RecipeComponent } from './modals/recipe/recipe.component';
 import { ErrorComponent } from './alerts/error/error.component';
@@ -49,6 +50,7 @@ import { ErrorconectionComponent } from './modals/errorconection/errorconection.
 import { ErrologinComponent } from './modals/errologin/errologin.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { EditDataDoctorComponent } from './modals/edit-data-doctor/edit-data-doctor.component';
+import { EditImageComponent } from './modals/edit-image/edit-image.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -74,7 +76,8 @@ registerLocaleData(localeEs, 'es');
     RecetaComponent,
     ErrorconectionComponent,
     ErrologinComponent,
-    EditDataDoctorComponent
+    EditDataDoctorComponent,
+    EditImageComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +96,7 @@ registerLocaleData(localeEs, 'es');
     MatStepperModule,
     MatFormFieldModule,
     MatSidenavModule,
+    MatTabsModule,
     NgxPaginationModule,
     MatSortModule
   ],
@@ -103,7 +107,8 @@ registerLocaleData(localeEs, 'es');
     DiagnosticsComponent,
     ErrorconectionComponent,
     ErrologinComponent,
-    EditDataDoctorComponent
+    EditDataDoctorComponent,
+    EditImageComponent
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'es' },],
   bootstrap: [AppComponent]

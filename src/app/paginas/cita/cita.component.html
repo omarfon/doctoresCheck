@@ -2,7 +2,7 @@
 <app-sidebar></app-sidebar>
 <div class="page-wrapper" style="height:100vh!important;">
   <div class="container-fluid">
-    <div class="row page-titles">
+   <!--  <div class="row page-titles">
       <div class="col-md-5 align-self-center">
         <h3 class="text-themecolor">Doctores inscritos</h3>
       </div>
@@ -17,9 +17,56 @@
           class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
             class="ti-settings text-white"></i></button>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12 col-md-12">
+    </div> -->
+    <mat-tab-group mat-align-tabs="start">
+      <mat-tab label="DATA DOCTORES"> <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                  <div class="table-responsive">
+                    <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list" data-page-size="10">
+                      <thead>
+                        <tr>
+                          <th>id</th>
+                          <th>imagen</th>
+                          <th>Doctor</th>
+                          <th>FraseCorta</th>
+                          <th>fraseExtendida</th>
+                          <th>formacion</th>
+                          <th>enfermedades</th>
+                          <th>editar</th>
+                          <th>aprobar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let c of dataDoctors | paginate: { itemsPerPage: 10, currentPage: p}">
+                          <td>{{c.data.idDoc}}</td>
+                          <td> <img class="imagenDoctor" src="{{urlBase}}/api/v2/ebooking/professionals/{{c.data.idDoc}}/image-url" alt="" (click)="upImage(c)"></td>
+                          <td>{{c.data.nombreDoctor}} {{c.data.apellidoDoctor}} {{c.data.apellidomDoctor}}</td>
+                          <td>{{c.data.fraseCorta}}</td>
+                          <td>{{c.data.fraseExtendida}} </td>
+                          <td>{{c.data.formacion}}</td>
+                          <td>{{c.data.enferquetrato}}</td>
+                          <td> <button class="btn btn-success bt-success" (click)="editDoctor(c)">editar</button>
+                          <td *ngIf="c.data.visible == false"> <button class="btn btn-info bt-outline" (click)="upDateDoctorVisibility(c)">aprobar</button>
+                          <td *ngIf="c.data.visible == true"> <button class="btn btn-light bt-dissabled" >aprobado</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+  
+            
+          </div>
+        </div>
+      </div></mat-tab>
+      <mat-tab label="INFO DOCTORES">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -29,40 +76,32 @@
                     <thead>
                       <tr>
                         <th>id</th>
+                        <th>Imagen</th>
                         <th>Doctor</th>
-                        <th>FraseCorta</th>
-                        <th>fraseExtendida</th>
-                        <th>formacion</th>
-                        <th>enfermedades</th>
+                        <th>cmp</th>
+                        <th>rne</th>
                         <th>editar</th>
-                        <th>aprobar</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let c of dataDoctors | paginate: { itemsPerPage: 10, currentPage: p}">
-                        <td>{{c.data.idDoc}}</td>
-                        <td>{{c.data.nombreDoctor}} {{c.data.apellidoDoctor}} {{c.data.apellidomDoctor}}</td>
-                        <td>{{c.data.fraseCorta}}</td>
-                        <td>{{c.data.fraseExtendida}} </td>
-                        <td>{{c.data.formacion}}</td>
-                        <td>{{c.data.enferquetrato}}</td>
+                      <tr *ngFor="let c of doctorsInfo| paginate: { itemsPerPage: 40, currentPage: p}">
+                        <td>{{c.id}}</td>
+                        <td> <img class="imagenDoctor" src="{{urlBase + c.imageUrl}}" alt=""></td>
+                        <td>{{c.nombre}} {{c.apellido1}} {{c.apellido2}}</td>
+                        <td>{{c.cmp}}</td>
+                        <td>{{c.rne}} </td>
                         <td> <button class="btn btn-success bt-success" (click)="editDoctor(c)">editar</button>
-                        <td *ngIf="c.data.visible == false"> <button class="btn btn-info bt-outline" (click)="upDateDoctorVisibility(c)">aprobar</button>
-                        <td *ngIf="c.data.visible == true"> <button class="btn btn-light bt-dissabled" >aprobado</button>
-                        </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-
           </div>
-
-          
         </div>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
-      </div>
-    </div>
+      </mat-tab>
+    </mat-tab-group>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+   
   </div>
 </div>
