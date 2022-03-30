@@ -60,8 +60,8 @@
                                     <tbody>
                                       <tr *ngFor="let d of c.professionalTrainings let item=index">
                                         <th scope="row">{{item+1}}</th>
-                                        <td >{{d.nameCenter}}</td>
-                                        <td >{{d.career}}</td>
+                                        <td *ngIf="d.nameCenter">{{d.nameCenter}}</td>
+                                        <td *ngIf="d.career">{{d.career}}</td>
                                         <td >{{d.data}}</td>
                                         
                                       </tr>

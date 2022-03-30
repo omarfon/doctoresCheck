@@ -37,7 +37,7 @@ export class EditDataDoctorComponent implements OnInit {
 
   close(){
   this.matDialogRef.close();
-}
 
+  }
 
 }
