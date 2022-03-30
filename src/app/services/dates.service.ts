@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { API_ENDPOINT } from 'src/environments/environment';
+import { API_ENDPOINT } from 'src/environments/environment.prod';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ export class DatesService {
   private url = `${this.SERVER}ebooking/agenda-doctor?professionalid=`;
   private urlinfo = `${this.SERVER}ebooking/info-profesionales`;
   private upImage = `${this.SERVER}ebooking/upload-photo/professional`;
-
+  public form: FormData;
   public dataDoctor: any;
   public dataId: any;
   constructor(public http: HttpClient) {
@@ -45,12 +45,12 @@ export class DatesService {
     )
   }
 
-  upLoadFile(File){
-    const authorization = localStorage.getItem('authorization');
- /*    let headers = new HttpHeaders({ "Authorization": authorization }); */
+  upLoadFile(form){
+     /*  const authorization = localStorage.getItem('authorization');
+ let headers = new HttpHeaders({ "Authorization": authorization });
     var headers = new HttpHeaders().set('content-type', "aplication/json")
-    const params = JSON.stringify(File);
-    return this.http.post(this.upImage , File, {headers}).pipe(
+    const params = JSON.stringify(File); */
+    return this.http.post(this.upImage , form).pipe(
       map((resp:any) =>{
         return resp
       })
@@ -58,3 +58,4 @@ export class DatesService {
   }
 
 }
+

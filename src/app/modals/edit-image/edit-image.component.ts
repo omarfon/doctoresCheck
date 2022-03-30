@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
-import { API_IMAGE } from 'src/environments/environment';
+import { API_IMAGE } from 'src/environments/environment.prod';
 import { DatesService } from '../../services/dates.service';
 
 export class Archivo{
@@ -23,15 +23,17 @@ export class EditImageComponent implements OnInit {
   public archivo: Archivo;
   public id;
   public preview: string;
+  public form: FormData;
   constructor(@Inject(MAT_DIALOG_DATA) public data: 
               any, public matDialogRef: MatDialogRef<EditImageComponent>,
               public sanitizer: DomSanitizer,
               public dataSrv: DatesService) { }
 
   ngOnInit() {
-    this.dataDoctor = this.data.data;
-    this.id = this.dataDoctor.idDoc;
+    this.dataDoctor = this.data;
+    this.id = this.dataDoctor.professionalId;
     console.log(this.dataDoctor);
+    
   }
 
   fileEvent(event){
@@ -43,7 +45,9 @@ export class EditImageComponent implements OnInit {
       console.log(event,file);
       if(file.type == "image/png"){
         this.archivo = new Archivo('photo',file, file.name);
-        console.log('this.archivo:',this.archivo);
+        this.form = new FormData();
+        this.form.append('photo',file, file.name);
+        console.log('this.archivo:',this.form);
       }
   }
 
@@ -70,11 +74,13 @@ export class EditImageComponent implements OnInit {
 
 
 
-  subirImagen(event: Archivo){
-    console.log(this.archivo, event);
-    this.dataSrv.upLoadFile(this.archivo).subscribe(response => {
+  subirImagen(){
+    console.log(this.form, event);
+    this.dataSrv.upLoadFile(this.form).subscribe(response => {
       console.log(response)
+      this.matDialogRef.close();
     })
+    window.location.reload()
   }
 
 }

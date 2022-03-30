@@ -1,14 +1,13 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { ConsultasService } from 'src/app/services/consultas.service';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { DoctorService } from 'src/app/services/doctor.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RecipeComponent } from 'src/app/modals/recipe/recipe.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import * as jsPDF from 'jspdf'
 import { EditDataDoctorComponent } from './../../modals/edit-data-doctor/edit-data-doctor.component';
-import Swal from 'sweetalert2'
-import { DatesService } from '../../services/dates.service';
-import { API_ENDPOINT, API_IMAGE } from '../../../environments/environment';
 import { EditImageComponent } from '../../modals/edit-image/edit-image.component';
+import { API_ENDPOINT, API_IMAGE } from '../../../environments/environment.prod';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-cita',
@@ -19,26 +18,30 @@ export class CitaComponent implements OnInit {
 
   @ViewChild('drawer', { static: false }) drawer: ElementRef;
   @ViewChild('htmlData', { static: false }) htmlData: ElementRef;
-  public consultas;
-  showFiller = false;
+  
+  /* showFiller = false;
   doctorData: any[] = [];
   public _consultas;
+  p: number = 1; */
+  public consultas;
   public dataDoctors;
-  p: number = 1;
-  public doctorsInfo;
+  public dataDoctors1;
   public urlBase = API_IMAGE;
+  public doctorsInfo;
+  
 
-  constructor(public consultaSrv: ConsultasService,
+  constructor(public consultaSrv: DoctorService,
     public modal: MatDialog,
-    public datesSrv: DatesService,
     public matSide: MatSidenavModule) { }
 
   ngOnInit() {
-/*     this.getAllConsultasPerDoctor(); */
-    this.getAllConsultas();
-    this.getInfoDoctores();
+/*     this.getAllConsultasPerDoctor(); 
+       this.getAllConsultas();      */
+       this.getalldoctores();
+       this.getInfoDoctores();
+    
   }
-
+/*
   getAllConsultasPerDoctor() {
     this.consultaSrv.getConsultasPerDoctor().subscribe((data: any) => {
       this._consultas = data.map(d => {
@@ -55,14 +58,6 @@ export class CitaComponent implements OnInit {
       console.log('this.consultas:', this.consultas);
     })
   }
-
-  getInfoDoctores(){
-    this.datesSrv.getInfoDoctors().subscribe(data => {
-      console.log(data);
-      this.doctorsInfo = data;
-    })
-  }
-
 
  getAllConsultas(){
    this.consultaSrv.getAllConsultas().subscribe(data => {
@@ -84,18 +79,39 @@ export class CitaComponent implements OnInit {
     Swal.fire('Data Aprobada...', 'Listo... acabas de aprobar los datos de este doctor', 'success')
   })
  }
-
+*/
  editDoctor(c){
-  const dialogRef = this.modal.open(EditDataDoctorComponent, {data:c});
+   console.log(c)
+   const dialogRef = this.modal.open(EditDataDoctorComponent, {data:c});
+  
   dialogRef.afterClosed().subscribe(result => {
     Swal.fire('Data Actualizada...', 'Listo... acabas de actualiza los datos de este doctor', 'success')
   });
    const modalrEF = this.modal.open(EditDataDoctorComponent, {data:c})
  }
 
- upImage(c){
-    this.modal.open(EditImageComponent, {data:c});
- }
-
-
+getalldoctores(){
+  
+  this.consultaSrv.getinfodoctor().subscribe((data: any) =>{
+      this.dataDoctors1=data;
+      console.log("especial",this.dataDoctors1)
+  })
+} 
+updatestatusdoctores(professionalId: any){
+  
+  this.consultaSrv.updatestatusdoctor(professionalId).subscribe(data =>{
+    
+  });
+      window.location.reload();
+     console.log("d", professionalId)
+}
+getInfoDoctores(){
+  this.consultaSrv.getinfodoctor().subscribe(data => {
+    console.log(data);
+    this.doctorsInfo = data;
+  })
+}
+upImage(c){
+  this.modal.open(EditImageComponent, {data:c});
+}
 }

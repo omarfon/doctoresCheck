@@ -1,23 +1,20 @@
-<h3>Edita la data de el doctor {{dataDoctor.apellidoDoctor}} {{dataDoctor.apellidomDoctor}}</h3>
+<h1 style="text-align: center">Editar información</h1>
+<h5 class="text-black">ID DEL DOCTOR:  </h5>
+<h3 class="text-black">{{dataDoctor.professionalId}} </h3>
+<h5 class="text-black">Nombre del doctor: </h5>
+<h3 class="text-black">{{dataDoctor.professionalFullname}} </h3>
 <form *ngIf="dataDoctor">
     <div class="row">
         <div class="col-6">
             <div class="form-group">
                 <label class="control-label m-b-20 title">Frase Corta</label>
-                <textarea type="text" id="name" class="form-control" name="fraseCorta"  [(ngModel)]="dataDoctor.fraseCorta">{{dataDoctor.fraseCorta}}</textarea>
+                <textarea type="text" id="name" class="form-control" name="fraseCorta"  [(ngModel)]="dataDoctor.shortSpeach">{{dataDoctor.shortSpeach}}</textarea>
               </div>
         </div>
         <div class="col-6">
             <div class="form-group">
               <label class="control-label m-b-20 title">Sobre mí</label>
-              <textarea type="text" id="name" class="form-control" name="fraseExtendida"  [(ngModel)]="dataDoctor.fraseExtendida"  value="{{dataDoctor.fraseExtendida}}">{{dataDoctor.fraseExtendida}}</textarea>
-            </div>
-        </div>
-
-        <div class="col-6">
-            <div class="form-group">
-              <label class="control-label m-b-20 title">Formación</label>
-              <textarea type="text" id="name" class="form-control" name="formacion"  [(ngModel)]="dataDoctor.formacion"  value="{{dataDoctor.formacion}}">{{dataDoctor.formacion}}</textarea>
+              <textarea type="text" id="name" class="form-control" name="fraseExtendida"  [(ngModel)]="dataDoctor.longSpeach"  value="{{dataDoctor.longSpeach}}">{{dataDoctor.longSpeach}}</textarea>
             </div>
         </div>
 
@@ -31,10 +28,15 @@
     <div>
         <div class="row">
             <div class="col"></div>
-            <div class="col"></div>
-            <div class="col"><button class="btn btn-error" (click)="close()">Cancelar</button></div>
-            <div class="col"><button class="btn btn-info" (click)="upDateDataPatient()">Actualizar data doctor</button></div>
+            
+            <div class="col"  ><button class="btn btn-info "  (click)="upDateDataPatient()">Actualizar</button></div>
+            <div class="col"><button class="btn btn-error " (click)="close()">Cancelar</button></div>
+           
         </div>
     </div>
+   
+    
+    
 
 </form>
+

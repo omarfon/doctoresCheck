@@ -20745,7 +20745,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   /***/
   function _(module, exports, __webpack_require__) {
     __webpack_require__(
-    /*! /Users/omar/proyectos/Dev/doctoresCheck/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-polyfills.js */
+    /*! C:\Users\ap023\Desktop\newedit2\doctoresCheck\node_modules\@angular-devkit\build-angular\src\angular-cli-files\models\es5-polyfills.js */
     "./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-polyfills.js");
 
     __webpack_require__(
@@ -20753,15 +20753,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     "./node_modules/zone.js/dist/zone-legacy.js");
 
     __webpack_require__(
-    /*! /Users/omar/proyectos/Dev/doctoresCheck/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js */
+    /*! C:\Users\ap023\Desktop\newedit2\doctoresCheck\node_modules\@angular-devkit\build-angular\src\angular-cli-files\models\jit-polyfills.js */
     "./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js");
 
     __webpack_require__(
-    /*! /Users/omar/proyectos/Dev/doctoresCheck/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-jit-polyfills.js */
+    /*! C:\Users\ap023\Desktop\newedit2\doctoresCheck\node_modules\@angular-devkit\build-angular\src\angular-cli-files\models\es5-jit-polyfills.js */
     "./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-jit-polyfills.js");
 
     module.exports = __webpack_require__(
-    /*! /Users/omar/proyectos/Dev/doctoresCheck/src/polyfills.ts */
+    /*! C:\Users\ap023\Desktop\newedit2\doctoresCheck\src\polyfills.ts */
     "./src/polyfills.ts");
     /***/
   }
